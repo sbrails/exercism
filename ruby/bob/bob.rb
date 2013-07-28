@@ -1,15 +1,32 @@
-# I think this one is the smallest so far.
 class Bob
   def hey(text)
-    input = text.to_s
-    if input.empty?
+    randomdude = Interlocutor.new(text.to_s)
+    if randomdude.is_silent?
       'Fine. Be that way.'
-    elsif input == input.upcase
+    elsif randomdude.is_yelling?
       'Woah, chill out!'
-    elsif input.end_with?('?')
+    elsif randomdude.is_asking_a_question?
       'Sure.'
     else
       'Whatever.'
     end
+  end
+end
+
+class Interlocutor < String
+  def initialize(input)
+    @input = input
+  end
+
+  def is_yelling?
+    @input == @input.upcase
+  end
+  
+  def is_asking_a_question?
+    @input.end_with?('?')
+  end
+  
+  def is_silent?
+    @input.empty?
   end
 end
